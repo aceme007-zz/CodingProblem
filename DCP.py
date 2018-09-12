@@ -28,8 +28,15 @@ def return_multiplied_array(input_list) -> list:
     product = reduce(lambda x, y : x*y, input_list)
     return [product/each for each in input_list]
 
-def return_multiplied_array_v2(input_list0) -> list:
-
+def return_multiplied_array_v2(input_list) -> list:
+    # without using division
+    temp = input_list.copy()
+    output_list = []
+    for i, val in enumerate(input_list):
+        temp[i] = 1
+        output_list.append(reduce(lambda x, y: x*y, temp))
+        temp[i] = val
+    return output_list
 
 input_list = [1, 2, 3, 4, 5]
 assert return_multiplied_array(input_list) == [120, 60, 40, 30, 24]
