@@ -6,8 +6,26 @@ from functools import reduce
 #
 
 ########################################################################################################################
-# Problem
-#
+# Problem 4
+# Given an array of integers, find the first missing positive integer in linear time and constant space.
+# In other words, find the lowest positive integer that does not exist in the array.
+# The array can contain duplicates and negative numbers as well.
+# For example, the input [3, 4, -1, 1] should give 2. The input [1, 2, 0] should give 3.
+# You can modify the input array in-place.
+
+def missing_lowest_int(input_list) -> int:
+    min_missing_postive_int_so_far = 1
+    for i in input_list:
+        if i == min_missing_postive_int_so_far:
+            min_missing_postive_int_so_far += 1
+        elif i > 0:
+            min_missing_postive_int_so_far = min(i+1, min_missing_postive_int_so_far)
+    return min_missing_postive_int_so_far
+
+input_list = [3, 4, -1, 1]
+assert missing_lowest_int(input_list) == 2
+input_list = [1, 2, 0]
+assert missing_lowest_int(input_list) == 3
 
 ########################################################################################################################
 # Problem 3
