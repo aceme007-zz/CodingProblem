@@ -6,6 +6,27 @@ from functools import reduce
 #
 
 ########################################################################################################################
+# Problem 5
+# cons(a, b) constructs a pair, and car(pair) and cdr(pair) returns the first and last element of that pair.
+# For example, car(cons(3, 4)) returns 3, and cdr(cons(3, 4)) returns 4.
+#
+# Given this implementation of cons:
+
+def cons(a, b):
+    def pair(f):
+        return f(a, b)
+    return pair
+
+def car(pair):
+    return pair(lambda x, y: x)
+
+def cdr(pair):
+    return pair(lambda x, y: y)
+
+assert car(cons(3, 4)) == 3
+assert cdr(cons(3, 4)) == 4
+
+########################################################################################################################
 # Problem 4
 # Given an array of integers, find the first missing positive integer in linear time and constant space.
 # In other words, find the lowest positive integer that does not exist in the array.
