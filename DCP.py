@@ -1,9 +1,75 @@
 from itertools import combinations
 from functools import reduce
+import time, datetime
 
 ########################################################################################################################
 # Problem
+# Implement a job scheduler which takes in a function f and an integer n, and calls f after n milliseconds.
+def job_scheduler(function_name, wait_time):
+    print('Entered scheduler function ' + str(datetime.datetime.now()))
+    time.sleep(wait_time * 0.001)
+    print('Running function ' + str(datetime.datetime.now()))
+    function_name()
+
+def echo_name():
+    print ('My name is aceme007')
+
+# job_scheduler(echo_name, 5000)
+
+########################################################################################################################
+# Problem
+# Given a list of integers, write a function that returns the largest sum of non-adjacent numbers. Numbers can be 0 or negative.
+# For example, [2, 4, 6, 2, 5] should return 13, since we pick 2, 6, and 5. [5, 1, 1, 5] should return 10, since we pick 5 and 5.
+# Follow-up: Can you do this in O(N) time and constant space?
+def largest_sum(input_list):
+    max_sum_temp = 0
+
+    def max_sum(arr, i):
+        if i == 0:
+            return arr[0]
+        if i == 1:
+            return max(arr[0], arr[1])
+        return max(max_sum(arr, i-1), arr[i] + max_sum(arr, i-2))
+
+    for i in range(len(input_list)):
+        max_so_far = max_sum(input_list, i)
+        max_sum_temp = max(max_sum_temp, max_so_far)
+    return max_sum_temp
+
+
+assert largest_sum([2, 4, 6, 2, 5]) == 13
+assert largest_sum([5, 1, 1, 5]) == 10
+
+
+########################################################################################################################
+# Problem
+# A unival tree (which stands for "universal value") is a tree where all nodes under it have the same value.
+# Given the root to a binary tree, count the number of unival subtrees.
+# For example, the following tree has 5 unival subtrees:
 #
+#    0
+#   / \
+#  1   0
+#     / \
+#    1   0
+#   / \
+#  1   1
+
+
+
+
+########################################################################################################################
+# Problem
+# Given the mapping a = 1, b = 2, ... z = 26, and an encoded message, count the number of ways it can be decoded.
+# For example, the message '111' would give 3, since it could be decoded as 'aaa', 'ka', and 'ak'.
+
+def count_message_decoded(message):
+    combo = []
+    for i in range(1, len(message)+1):
+        a = list(set([ex for ex in combinations(message, i)]))
+        combo.extend(a)
+    return len(set(combo))
+assert count_message_decoded('111') == 3
 
 ########################################################################################################################
 # Problem 5
